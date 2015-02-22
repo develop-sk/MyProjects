@@ -1,1 +1,0 @@
-Sample WPF projects.
