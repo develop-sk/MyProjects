@@ -49,6 +49,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyListBox.cs" />
+    <Compile Include="MyTabControl.cs" />
     <Compile Include="ApplicationWindow.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MainWindow.cs" />
