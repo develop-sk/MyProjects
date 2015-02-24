@@ -15,6 +15,7 @@ namespace Note_Pad__
         private MainMenu mainMenu;
         private MyListBox myList;
         private MyTabControl myTab;
+        List<string> filePath;
         public MainWindow()
         {
             Title = "NotePad--";
@@ -83,28 +84,36 @@ namespace Note_Pad__
             myTab = new MyTabControl();
             Grid.SetColumn(myTab, 1);
             gridApp.Children.Add(myTab);
+
+            filePath = new List<string>();
         }
 
         void fileItemOpen_Click(object sender, RoutedEventArgs e)
         {
+            bool filePathAdd = false;
             OpenFileDialog ofd = new OpenFileDialog();
             if(ofd.ShowDialog() == true)
             {
-                myList.AddListItem(ofd.SafeFileName);
-                myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
+                for (int i = 0; i < filePath.Count; i++ )
+                {
+                    if(ofd.FileName == filePath[i])
+                    {
+                        filePathAdd = true;
+                    }
+                }
+                if (!(filePathAdd))
+                {
+                    filePath.Add(ofd.FileName);
+                    myList.AddListItem(ofd.SafeFileName);
+                    myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
+                }
             }
         }
 
         void editItemSave_Click(object sender, RoutedEventArgs e)
         {
 
-            //bool filePathAdd = false;
-            //OpenFileDialog openFile = new OpenFileDialog();
-            //if(openFile.ShowDialog() == true)
-            //{
-                
-            //}
-
+          
         }
     }
 }
