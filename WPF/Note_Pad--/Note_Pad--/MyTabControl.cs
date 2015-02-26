@@ -16,17 +16,21 @@ namespace Note_Pad__
 
         }
 
-        public TabItem AddTabItem(string fileName, string filePath)
+        public NotePadTabItem AddTabItem(string fileName, string filePath)
         {
-            TabItem tabItem = new TabItem();
+            NotePadTabItem tabItem = new NotePadTabItem();
             TextBox textBox = new TextBox();
             Grid textgrid = new Grid();
             textgrid.Children.Add(textBox);
             tabItem.Content = textgrid;
+            tabItem.fileInfo.fileName = fileName;
+            tabItem.fileInfo.fileFullPath = filePath;
             tabItem.Header = fileName;
+
             textBox.Text = File.ReadAllText(filePath);
+            tabItem.txtbox = textBox;
             Items.Add(tabItem);
-          // SelectedItem = tabItem;
+           SelectedItem = tabItem;
             return tabItem;
         }
     }

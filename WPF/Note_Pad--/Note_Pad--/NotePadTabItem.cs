@@ -10,12 +10,11 @@ namespace Note_Pad__
     class NotePadTabItem : TabItem
     {
         public FileInfo fileInfo;
-        public TextBox textbox;
+        public TextBox txtbox;
 
         public NotePadTabItem() : base()
         {
             fileInfo = new FileInfo();
-            textbox = new TextBox();
         }
     }
 }

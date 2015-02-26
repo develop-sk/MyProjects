@@ -14,9 +14,11 @@ namespace Note_Pad__
 
         }
 
-        public ListBoxItem AddListItem(string selectedFile)
+        public NotePadListBoxItem AddListItem(string selectedFile, string filePath)
         {
-            ListBoxItem listItem = new ListBoxItem();
+            NotePadListBoxItem listItem = new NotePadListBoxItem();
+            listItem.fileInfo.fileName = selectedFile;
+            listItem.fileInfo.fileFullPath = filePath;
             listItem.Content = selectedFile;
             Items.Add(listItem);
             return listItem;

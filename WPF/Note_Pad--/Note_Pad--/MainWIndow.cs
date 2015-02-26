@@ -89,41 +89,37 @@ namespace Note_Pad__
             myTab.SelectionChanged += myTab_SelectionChanged;
             filePath = new List<string>();
         }
-
+//When a TabItem is selected, changing the focus of listitem to that file
         void myTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TabControl tab1 = (TabControl)e.Source;
-            TabItem tabItem = (TabItem)tab1.SelectedItem;
-            
-            string strTab = Convert.ToString(tabItem.Header);
-            ListBoxItem li = null;
+            NotePadTabItem tabItem = (NotePadTabItem)tab1.SelectedItem;
+            NotePadListBoxItem li = null;
 
-            foreach (ListBoxItem list in myList.Items)
+            foreach (NotePadListBoxItem listItem in myList.Items)
             {
-                if (list.Content.ToString() == strTab)
+                if (listItem.fileInfo.fileFullPath.ToString() == tabItem.fileInfo.fileFullPath.ToString())
                 {
-                    li = list;
+                    li = listItem;
                 }
             }
 
-            //if(li != null)
                 myList.SelectedItem = li;
         }
 
         void myList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox list1 = (ListBox)e.Source;
-            ListBoxItem listItem = (ListBoxItem)list1.SelectedItem;
-            TabItem tb = null;
-            foreach(TabItem tab in myTab.Items)
+            NotePadListBoxItem listItem = (NotePadListBoxItem)list1.SelectedItem;
+            NotePadTabItem tb = null;
+            foreach(NotePadTabItem tabItem in myTab.Items)
             {
-                if(tab.Header.ToString() == listItem.Content.ToString())
+                if(tabItem.fileInfo.fileFullPath.ToString() == listItem.fileInfo.fileFullPath.ToString())
                 {
-                    tb = tab;
+                    tb = tabItem;
                 }
             }
 
-            //if(tb != null)
                 myTab.SelectedItem = tb;
         }
 
@@ -143,9 +139,10 @@ namespace Note_Pad__
                 if (!filePathAdd)
                 {
                    filePath.Add(ofd.FileName);
-                   ListBoxItem newListItem =  myList.AddListItem(ofd.SafeFileName);
-                   TabItem newTabItem = myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
+                   NotePadListBoxItem newListItem =  myList.AddListItem(ofd.SafeFileName, ofd.FileName);
+                   NotePadTabItem newTabItem = myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
                     myList.SelectedItem = newListItem;
+                    myTab.SelectedItem = newTabItem;
                 }
             }
         }
