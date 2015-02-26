@@ -14,11 +14,13 @@ namespace Note_Pad__
 
         }
 
-        public void AddListItem(string selectedFile)
+        public ListBoxItem AddListItem(string selectedFile)
         {
             ListBoxItem listItem = new ListBoxItem();
             listItem.Content = selectedFile;
             Items.Add(listItem);
+            return listItem;
+           // SelectedItem = listItem;
         }
     }
 }

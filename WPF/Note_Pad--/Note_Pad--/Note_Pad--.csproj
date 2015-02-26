@@ -49,11 +49,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileInfo.cs" />
     <Compile Include="MyListBox.cs" />
     <Compile Include="MyTabControl.cs" />
     <Compile Include="ApplicationWindow.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="NotePadListBoxItem.cs" />
+    <Compile Include="NotePadTabItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

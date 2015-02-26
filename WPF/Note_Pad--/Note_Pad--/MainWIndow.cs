@@ -85,7 +85,46 @@ namespace Note_Pad__
             Grid.SetColumn(myTab, 1);
             gridApp.Children.Add(myTab);
 
+            myList.SelectionChanged += myList_SelectionChanged;
+            myTab.SelectionChanged += myTab_SelectionChanged;
             filePath = new List<string>();
+        }
+
+        void myTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabControl tab1 = (TabControl)e.Source;
+            TabItem tabItem = (TabItem)tab1.SelectedItem;
+            
+            string strTab = Convert.ToString(tabItem.Header);
+            ListBoxItem li = null;
+
+            foreach (ListBoxItem list in myList.Items)
+            {
+                if (list.Content.ToString() == strTab)
+                {
+                    li = list;
+                }
+            }
+
+            //if(li != null)
+                myList.SelectedItem = li;
+        }
+
+        void myList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox list1 = (ListBox)e.Source;
+            ListBoxItem listItem = (ListBoxItem)list1.SelectedItem;
+            TabItem tb = null;
+            foreach(TabItem tab in myTab.Items)
+            {
+                if(tab.Header.ToString() == listItem.Content.ToString())
+                {
+                    tb = tab;
+                }
+            }
+
+            //if(tb != null)
+                myTab.SelectedItem = tb;
         }
 
         void fileItemOpen_Click(object sender, RoutedEventArgs e)
@@ -101,11 +140,12 @@ namespace Note_Pad__
                         filePathAdd = true;
                     }
                 }
-                if (!(filePathAdd))
+                if (!filePathAdd)
                 {
-                    filePath.Add(ofd.FileName);
-                    myList.AddListItem(ofd.SafeFileName);
-                    myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
+                   filePath.Add(ofd.FileName);
+                   ListBoxItem newListItem =  myList.AddListItem(ofd.SafeFileName);
+                   TabItem newTabItem = myTab.AddTabItem(ofd.SafeFileName, ofd.FileName);
+                    myList.SelectedItem = newListItem;
                 }
             }
         }
