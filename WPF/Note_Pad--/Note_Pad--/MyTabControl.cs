@@ -29,9 +29,22 @@ namespace Note_Pad__
 
             textBox.Text = File.ReadAllText(filePath);
             tabItem.txtbox = textBox;
+
+            textBox.KeyDown += textBox_KeyDown;
             Items.Add(tabItem);
            SelectedItem = tabItem;
             return tabItem;
         }
+
+        void textBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            NotePadTabItem tabItem1 = (NotePadTabItem)SelectedItem;
+            if(!tabItem1.isDirty)
+            {
+                tabItem1.Header += "*";
+                tabItem1.isDirty = true;
+            }
+        }
+
     }
 }

@@ -11,6 +11,7 @@ namespace Note_Pad__
     {
         public FileInfo fileInfo;
         public TextBox txtbox;
+        public bool isDirty = false;
 
         public NotePadTabItem() : base()
         {

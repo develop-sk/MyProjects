@@ -55,6 +55,7 @@ namespace Note_Pad__
             MenuItem editItemSave = new MenuItem();
             editItemSave.Header = "Save";
             editItemSave.Click += editItemSave_Click;
+
             MenuItem editItemExit = new MenuItem();
             editItemExit.Header = "Exit";
             editItem.Items.Add(editItemSave);
@@ -89,6 +90,7 @@ namespace Note_Pad__
             myTab.SelectionChanged += myTab_SelectionChanged;
             filePath = new List<string>();
         }
+
 //When a TabItem is selected, changing the focus of listitem to that file
         void myTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -104,9 +106,10 @@ namespace Note_Pad__
                 }
             }
 
-                myList.SelectedItem = li;
+            myList.SelectedItem = li;
         }
 
+//When a listItem is selected opening that particular TabItem
         void myList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox list1 = (ListBox)e.Source;
@@ -123,6 +126,7 @@ namespace Note_Pad__
                 myTab.SelectedItem = tb;
         }
 
+//Opening files
         void fileItemOpen_Click(object sender, RoutedEventArgs e)
         {
             bool filePathAdd = false;
@@ -147,10 +151,17 @@ namespace Note_Pad__
             }
         }
 
+        //Saving File
         void editItemSave_Click(object sender, RoutedEventArgs e)
         {
-
-          
+            NotePadTabItem tabItem = (NotePadTabItem)myTab.SelectedItem;
+            if(tabItem.isDirty)
+            {
+                string fileContent = tabItem.txtbox.Text;
+                File.WriteAllText(tabItem.fileInfo.fileFullPath, fileContent);
+                tabItem.isDirty = false;
+            }
+            tabItem.Header = tabItem.fileInfo.fileName;
         }
     }
 }
